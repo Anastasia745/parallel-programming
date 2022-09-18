@@ -15,12 +15,12 @@ int main(int argc, char* argv[])
     int k2 = 0;
     int j = 0;
     FILE* file;
-    ifstream in("C:\\Users\\Анастасия\\source\\repos\\PPLab1\\file.wav", ifstream::ate | ifstream::binary);
+    ifstream in("../file.wav", ifstream::ate | ifstream::binary);
     int size = in.tellg() / 2;
     short* mass = new short[size];
 
     errno_t err;
-    err = fopen_s(&file, "C:\\Users\\Анастасия\\source\\repos\\PPLab1\\file.wav", "rb");
+    err = fopen_s(&file, "../file.wav", "rb");
     if (err)
     {
         printf_s("Failed open file, error %d", err);
