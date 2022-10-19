@@ -28,8 +28,10 @@ struct task
     short wav_numbers[M];
 };
 
-int global_res1 = 0;
-int global_res2 = 0;
+int global_res1_ct = 0;
+int global_res2_ct = 0;
+int global_res1_omp = 0;
+int global_res2_omp = 0;
 
 DWORD __stdcall f(void* arg)
 {
@@ -44,8 +46,8 @@ DWORD __stdcall f(void* arg)
             res2++;
     }
     EnterCriticalSection(&cs);
-    global_res1 += res1;
-    global_res2 += res2;
+    global_res1_ct += res1;
+    global_res2_ct += res2;
     printf("Thread %d:\n   >16000: %d   <16000: %d\n", t->number, res1, res2);
     LeaveCriticalSection(&cs);
     return 0;
@@ -107,9 +109,11 @@ int main()
         printf_s("Файл не подходит\n");
     }
 
-    // Потоки
+    printf("\n-- CreateThread --\n\n");
+
+    // CreateThread
     InitializeCriticalSection(&cs);
-    for (int i = 0;i < N;i++)
+    for (int i = 0; i < N; i++)
     {
         short* wav_numbers = new short[M];
         t[i].from = M - (i * M / N);
@@ -128,7 +132,40 @@ int main()
     for (int i = 0;i < N;i++)
         WaitForSingleObject(th[i], INFINITE);
     WaitForMultipleObjects(N, th, true, INFINITE);
-    printf("\nК-во чисел, >16000: %d\n", global_res1);
-    printf("К-во чисел, <16000: %d\n", global_res2);
+    printf("\nК-во чисел, >16000: %d\n", global_res1_ct);
+    printf("К-во чисел, <16000: %d\n", global_res2_ct);
     DeleteCriticalSection(&cs);
+
+    printf("\n\n-- OMP --\n\n");
+
+    // OMP
+    int i;
+#pragma omp parallel shared(a)
+    {
+#pragma omp for private(i,j,sum) 
+        int j;
+        for (i = 0; i < N; i++)
+        {
+            int k1 = 0;
+            int k2 = 0;
+
+            int from = M - (i * M / N);
+            int to = M - ((i + 1) * M / N);
+
+            for (j = from; j > to; j--)
+            {
+                if (abs(mass[i]) > 16000)
+                    k1++;
+                if (abs(mass[i]) < 16000)
+                    k2++;
+            }
+            global_res1_omp = global_res1_omp + k1;
+            global_res2_omp = global_res2_omp + k2;
+            printf("К-во числе > 16000 в %d потоке: %d\n", i, k1);
+            printf("К-во числе < 16000 в %d потоке: %d\n", i, k2);
+        }
+    }
+
+    printf("\nК-во числе > 16000: %d\n", global_res1_omp);
+    printf("К-во числе < 16000: %d\n", global_res2_omp);
 }
