@@ -1,0 +1,8 @@
+﻿  PP_DZ3.cpp
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ3\PP_DZ3\PP_DZ3.cpp(44,18): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ3\PP_DZ3\PP_DZ3.cpp(66,13): error C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ3\PP_DZ3\PP_DZ3.cpp(78,13): error C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ3\PP_DZ3\PP_DZ3.cpp(80,23): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ3\PP_DZ3\PP_DZ3.cpp(81,13): error C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ3\PP_DZ3\PP_DZ3.cpp(103,9): error C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ3\PP_DZ3\PP_DZ3.cpp(104,19): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
