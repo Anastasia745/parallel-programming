@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PP_DZ4", "PP_DZ4\PP_DZ4.vcxproj", "{CF37F28E-A2A4-4939-96E0-412A40C23F04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF37F28E-A2A4-4939-96E0-412A40C23F04}.Debug|x64.ActiveCfg = Debug|x64
+		{CF37F28E-A2A4-4939-96E0-412A40C23F04}.Debug|x64.Build.0 = Debug|x64
+		{CF37F28E-A2A4-4939-96E0-412A40C23F04}.Debug|x86.ActiveCfg = Debug|Win32
+		{CF37F28E-A2A4-4939-96E0-412A40C23F04}.Debug|x86.Build.0 = Debug|Win32
+		{CF37F28E-A2A4-4939-96E0-412A40C23F04}.Release|x64.ActiveCfg = Release|x64
+		{CF37F28E-A2A4-4939-96E0-412A40C23F04}.Release|x64.Build.0 = Release|x64
+		{CF37F28E-A2A4-4939-96E0-412A40C23F04}.Release|x86.ActiveCfg = Release|Win32
+		{CF37F28E-A2A4-4939-96E0-412A40C23F04}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B24EF18E-98CD-4A7A-A58B-8919876722C4}
+	EndGlobalSection
+EndGlobal

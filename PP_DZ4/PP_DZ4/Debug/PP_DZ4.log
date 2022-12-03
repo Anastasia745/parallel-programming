@@ -1,0 +1,14 @@
+﻿  PP_DZ4.cpp
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ4\PP_DZ4\PP_DZ4.cpp(63,14): warning C4244: инициализация: преобразование "std::streamoff" в "int", возможна потеря данных
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ4\PP_DZ4\PP_DZ4.cpp(103,24): warning C4477: "printf": в строке форматирования "%s" требуется аргумент типа "char *", но вариативный аргумент "2" имеет тип "RESULT"
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ4\PP_DZ4\PP_DZ4.cpp(104,24): warning C4477: "printf": в строке форматирования "%s" требуется аргумент типа "char *", но вариативный аргумент "2" имеет тип "RESULT"
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ4\PP_DZ4\PP_DZ4.cpp(105,24): warning C4477: "printf": в строке форматирования "%s" требуется аргумент типа "char *", но вариативный аргумент "2" имеет тип "RESULT"
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ4\PP_DZ4\PP_DZ4.cpp(48,32): warning C4101: RecvRank: неиспользованная локальная переменная
+PP_DZ4.obj : error LNK2019: ссылка на неразрешенный внешний символ _MPI_Send@24 в функции _main.
+PP_DZ4.obj : error LNK2019: ссылка на неразрешенный внешний символ _MPI_Recv@28 в функции _main.
+PP_DZ4.obj : error LNK2019: ссылка на неразрешенный внешний символ _MPI_Comm_size@8 в функции _main.
+PP_DZ4.obj : error LNK2019: ссылка на неразрешенный внешний символ _MPI_Comm_rank@8 в функции _main.
+PP_DZ4.obj : error LNK2019: ссылка на неразрешенный внешний символ _MPI_Init@8 в функции _main.
+PP_DZ4.obj : error LNK2019: ссылка на неразрешенный внешний символ _MPI_Finalize@0 в функции _main.
+C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x64\msmpi.lib : warning LNK4272: тип компьютера библиотеки "x64" конфликтует с типом целевого компьютера "x86"
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ4\Debug\PP_DZ4.exe : fatal error LNK1120: неразрешенных внешних элементов: 6

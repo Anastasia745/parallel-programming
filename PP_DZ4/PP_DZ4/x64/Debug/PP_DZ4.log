@@ -1,0 +1,5 @@
+﻿  PP_DZ4.cpp
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ4\PP_DZ4\PP_DZ4.cpp(71,22): warning C4244: инициализация: преобразование "std::streamoff" в "int", возможна потеря данных
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ4\PP_DZ4\PP_DZ4.cpp(113,22): warning C4244: инициализация: преобразование "std::streamoff" в "int", возможна потеря данных
+C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ4\PP_DZ4\PP_DZ4.cpp(50,28): warning C4101: RecvRank: неиспользованная локальная переменная
+  PP_DZ4.vcxproj -> C:\Users\Анастасия\source\repos\PP_DZ1\PP_DZ4\x64\Debug\PP_DZ4.exe
