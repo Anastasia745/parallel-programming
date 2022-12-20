@@ -61,9 +61,6 @@ int main(int argc, char* argv[])
             j++;
         };
 
-        int mass_res1[M] = {};
-        int mass_res2[M] = {};
-
         for (int i = 1; i <= M; i++)
         {
             if (fork())
@@ -86,15 +83,25 @@ int main(int argc, char* argv[])
                 if (abs(mass[i]) < 16000)
                     res2++;
             }
-            mass_res1[pid-1] = res1;
-            mass_res2[pid-1] = res2;
+            char fileName[4096];
+            sprintf(fileName, "%d.txt", pid);
+            FILE* new_file = fopen(fileName, "w");
+            fprintf(new_file, "%d\n%d\n", res1, res2);
+            fclose(new_file);
             return 0;
         }
         else {
             for (int i = 1; i <= M; i++)
             {
-                global_res1 = global_res1 + mass_res1[i-1];
-                global_res2 = global_res2 + mass_res2[i-1];
+                char fileName[4096];
+                int res1;
+                int res2;
+                sprintf(fileName, "%d.txt", i);
+                FILE* new_file = fopen(fileName, "r");
+                fscanf(new_file, "%d\n%d\n", &res1, &res2);
+                fclose(new_file);
+                global_res1 = global_res1 + res1;
+                global_res2 = global_res2 + res2;
             }
             cout << "К-во чисел, модуль которых больше 16000: " << global_res1 << endl;
             cout << "К-во чисел, модуль которых меньше 16000: " << global_res2 << endl;
