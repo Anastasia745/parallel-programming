@@ -1,0 +1,2 @@
+﻿  PP_BMP_CreateProcess_CreateMutex.cpp
+LINK : fatal error LNK1168: не удается открыть C:\Users\Анастасия\source\repos\PP_DZ1\PP_BMP_CreateProcess_CreateMutex\Debug\PP_BMP_CreateProcess_CreateMutex.exe для записи
