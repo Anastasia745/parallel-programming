@@ -34,6 +34,9 @@ const int N = 7;
 HANDLE proc[N];
 HANDLE pipe[N];
 
+int global_ans1 = 0;
+int global_ans2 = 0;
+
 int main(int argc, char* argv[])
 {
     setlocale(LC_ALL, "Russian");
@@ -88,9 +91,6 @@ int main(int argc, char* argv[])
             mass[i][j] = getPixelInfo(i, j, bitMapFileHeader, bitMapInfoHeader, pixels)->r;
         }
     }
-
-    int global_ans1 = 0;
-    int global_ans2 = 0;
 
     if (argc == 1)
     {
