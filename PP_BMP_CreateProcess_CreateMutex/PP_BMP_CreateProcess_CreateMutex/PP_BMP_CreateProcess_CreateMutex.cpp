@@ -18,21 +18,18 @@ using namespace std;
 
 struct RGB
 {
-    uint8_t r, g, b, a;
+    int r, g, b, a;
 };
 
-RGB* getPixel(uint32_t x, uint32_t y, BITMAPFILEHEADER bitMapFileHeader, BITMAPINFOHEADER bitMapInfoHeader, uint8_t* pixels)
+RGB* getPixelInfo(int i, int j, BITMAPFILEHEADER bitMapFileHeader, BITMAPINFOHEADER bitMapInfoHeader, int* pixels)
 {
     RGB* rgb = reinterpret_cast<RGB*>(pixels);
-    return &rgb[(bitMapInfoHeader.biHeight - 1 - y) * bitMapInfoHeader.biWidth + x];
+    return &rgb[(bitMapInfoHeader.biHeight - 1 - j) * bitMapInfoHeader.biWidth + i];
 }
 
 const int W = 640;
 const int H = 462;
 const int N = 7;
-
-int global_res1_th = 0;
-int global_res2_th = 0;
 
 HANDLE proc[N];
 HANDLE mutex;
@@ -43,7 +40,6 @@ int main(int argc, char* argv[])
     BITMAPFILEHEADER bitMapFileHeader;
     BITMAPINFOHEADER bitMapInfoHeader;
 
-    int j = 0;
     FILE* file;
     ifstream in("../file.bmp", ifstream::ate | ifstream::binary);
 
@@ -56,18 +52,20 @@ int main(int argc, char* argv[])
     }
     fread_s(&bitMapFileHeader, sizeof(BITMAPFILEHEADER), sizeof(BITMAPFILEHEADER), 1, file);
     fread_s(&bitMapInfoHeader, sizeof(BITMAPINFOHEADER), sizeof(BITMAPINFOHEADER), 1, file);
-    // printf_s("Размер файла %d x %d пикселей", bitMapInfoHeader.biWidth, bitMapInfoHeader.biHeight);
+    int widthBMP = bitMapInfoHeader.biWidth;
+    int heightBMP = bitMapInfoHeader.biHeight;
+    // printf_s("Размер файла %d x %d пикселей", widthBMP, heightBMP);
     in.seekg(bitMapFileHeader.bfOffBits, std::ios::beg);
-    uint8_t* pixels = new uint8_t[bitMapFileHeader.bfSize - bitMapFileHeader.bfOffBits];
+    int* pixels = new int[bitMapFileHeader.bfSize - bitMapFileHeader.bfOffBits];
     in.read(reinterpret_cast<char*>(&pixels[0]), bitMapFileHeader.bfSize - bitMapFileHeader.bfOffBits);
-    uint8_t* temp = new uint8_t[bitMapInfoHeader.biWidth * bitMapInfoHeader.biHeight * sizeof(RGB)];
-    uint8_t* inp = pixels;
+    int* temp = new int[widthBMP * heightBMP * sizeof(RGB)];
+    int* inp = pixels;
     RGB* rgb = reinterpret_cast<RGB*>(temp);
-    int padding = (bitMapInfoHeader.biSizeImage - bitMapInfoHeader.biWidth * bitMapInfoHeader.biHeight * 3) / bitMapInfoHeader.biHeight;
+    int padding = (bitMapInfoHeader.biSizeImage - widthBMP * heightBMP * 3) / heightBMP;
 
-    for (int i = 0; i < bitMapInfoHeader.biHeight; ++i, inp += padding)
+    for (int i = 0; i < heightBMP; i++, inp += padding)
     {
-        for (int j = 0; j < bitMapInfoHeader.biWidth; ++j)
+        for (int j = 0; j < widthBMP; ++j)
         {
             rgb->b = *(inp++);
             rgb->g = *(inp++);
@@ -79,15 +77,15 @@ int main(int argc, char* argv[])
     delete[] pixels;
     pixels = temp;
 
-    uint8_t** mass = (uint8_t**)malloc(bitMapInfoHeader.biWidth * sizeof(uint8_t*));
-    for (int i = 0; i < bitMapInfoHeader.biWidth; i++)
-        mass[i] = (uint8_t*)malloc(bitMapInfoHeader.biHeight * sizeof(uint8_t));
+    int** mass = (int**)malloc(widthBMP * sizeof(int*));
+    for (int i = 0; i < widthBMP; i++)
+        mass[i] = (int*)malloc(heightBMP * sizeof(int));
 
-    for (int i = 0; i < bitMapInfoHeader.biWidth; ++i)
+    for (int i = 0; i < widthBMP; ++i)
     {
-        for (int j = 0; j < bitMapInfoHeader.biHeight; j++)
+        for (int j = 0; j < heightBMP; j++)
         {
-            mass[i][j] = getPixel(i, j, bitMapFileHeader, bitMapInfoHeader, pixels)->r;
+            mass[i][j] = getPixelInfo(i, j, bitMapFileHeader, bitMapInfoHeader, pixels)->r;
         }
     }
 
@@ -106,9 +104,9 @@ int main(int argc, char* argv[])
             si.cb = sizeof(si);
             si.wShowWindow = SW_HIDE;
             ZeroMemory(&pi, sizeof(pi));
-            
-            int from = i * (W * H) / N;
-            int to = (i + 1) * (W * H) / N;
+
+            int from = W - (i * W / N);
+            int to = W - ((i + 1) * W / N);
 
             char cmd[4096];
             sprintf(cmd, "\"%s\" %d %d %d", argv[0], from, to, i);
@@ -132,6 +130,8 @@ int main(int argc, char* argv[])
             global_ans2 += ans2;
             fclose(f);
         }
+        printf("\nК-во пикселей, >128: %d\n", global_ans1);
+        printf("К-во пикселей, <128: %d\n", global_ans2);
     }
     else
     {
@@ -140,19 +140,17 @@ int main(int argc, char* argv[])
         int number = atoi(argv[3]);
         int ans1 = 0;
         int ans2 = 0;
+
         for (int i = from; i > to; i--)
         {
             for (int j = 0; j < H; j++)
-            {
+            { 
                 if (mass[i][j] > 128)
                     ans1++;
                 else
                     ans2++;
             }
         }
-
-        global_res1_th += ans1;
-        global_res2_th += ans2;
 
         char filename[4096];
         sprintf(filename, "%d.txt", number);
@@ -166,4 +164,5 @@ int main(int argc, char* argv[])
         }
         CloseHandle(proc[number]);
     }
+    return 0;
 }
