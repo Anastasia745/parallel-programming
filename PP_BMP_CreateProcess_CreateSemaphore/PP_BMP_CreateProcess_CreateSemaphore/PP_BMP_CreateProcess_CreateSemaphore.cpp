@@ -118,7 +118,7 @@ int main(int argc, char* argv[])
 
         int global_ans1 = 0;
         int global_ans2 = 0;
-        for (int i = 0;i < N;i++)
+        for (int i = 1;i < N;i++)
         {
             char filename[4096];
             sprintf(filename, "%d.txt", i);
