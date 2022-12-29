@@ -33,6 +33,8 @@ const int N = 7;
 
 HANDLE proc[N];
 HANDLE semaphore;
+int global_ans1 = 0;
+int global_ans2 = 0;
 
 int main(int argc, char* argv[])
 {
@@ -116,8 +118,6 @@ int main(int argc, char* argv[])
         WaitForMultipleObjects(N, proc, true, INFINITE);
         CloseHandle(semaphore);
 
-        int global_ans1 = 0;
-        int global_ans2 = 0;
         for (int i = 1;i < N;i++)
         {
             char filename[4096];
