@@ -154,7 +154,7 @@ int main(int argc, char* argv[])
         char filename[4096];
         sprintf(filename, "%d.txt", number);
         FILE* f = fopen(filename, "w");
-        DWORD result = WaitForSingleObject(semaphore, INFINITE);
+        DWORD result = WaitForSingleObject(semaphore, 0L);
         if (result == WAIT_OBJECT_0)
         {
             fprintf(f, "%d\n%d\n", ans1, ans2);
